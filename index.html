@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+  }
+
+  .footer,
+  .push {
+    height: 50px;
+  }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="icon" type="image/png" href="https://images-eu.ssl-images-amazon.com/images/I/41hzbXlmykL.png">
+  <title>Weather</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.4/tailwind.min.css">
+</head>
+
+<body class="grid justify-items-center bg-gray-800 text-white mb-4">
+  <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500 text-8xl mt-2">Weather app</h1>
+  <p class="text-gray-600">an open source project by Little studios and Luna</p>
+  <div class="p-8">
+
+    <div class="p-8">
+      <div class="bg-white flex items-center rounded-full shadow-xl">
+        <input class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" id="search"
+          type="text" placeholder="Earth">
+
+        <div class="p-4">
+          <button
+            class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center"
+            onclick="yes()">
+            Go
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-gray-700 cursor-default">
+    __________________________________________________________________________________
+  </div>
+
+  <div id="weather" style="display: none !important;" class="pt-20">
+    <div class="w-1/2 float-left hidden md:block">
+      <img src="https://cdn.weatherapi.com/weather/128x128/day/353.png" id="splashIcon" style="border-radius: 20px;"
+        class="overflow-hidden w-64 mx-auto">
+    </div>
+    <a id="location" class="text-3xl font-semibold text-white"></a><br><br>
+
+    <a id="temp_c" class="text-2xl font-semibold text-white"></a>
+    <a id="temp_f" class="font-semibold text-gray-600"></a><br>
+
+    <a id="wind_kph" class="text-2xl font-semibold text-white"></a>
+    <a id="wind_mph" class="font-semibold text-gray-600"></a>
+
+    <a id="wind_dir" class="text-2xl font-semibold text-white"></a>
+    <a id="wind_degree" class="font-semibold text-gray-600"></a><br>
+
+    <a id="humidity" class="text-2xl font-semibold text-white"></a>
+
+    <a id="vis_km" class="text-2xl font-semibold text-white"></a>
+    <a id="vis_miles" class="font-semibold text-gray-600"></a><br>
+
+  </div>
+</body>
+</div>
+
+
+<footer>
+  
+    <div class="wrapper">
+
+      <a id="last_updated" class="font-semibold text-gray-600"></a>
+
+      <div class="push"></div>
+    </div>
+    <footer class="footer"></footer>
+    
+</footer>
+
+<script>
+  function getel(el) {
+    document.getElementById(el)
+  }
+
+  function yes() {
+    fetch("http://api.weatherapi.com/v1/current.json?key=a815dcc598db4709869184846202108&q=" +
+        document.getElementById("search").value)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        document.getElementById("weather").style.display = "block";
+        document.getElementById("location").textContent = `${data.location.name}`
+        document.getElementById("temp_c").textContent = `${data.current.temp_c}°C`
+        document.getElementById("temp_f").textContent = `${data.current.temp_f}°F`
+        document.getElementById("wind_kph").textContent = `${data.current.wind_kph} kph`
+        document.getElementById("wind_mph").textContent = `${data.current.wind_mph} mph`
+        document.getElementById("wind_dir").textContent = `${data.current.wind_dir}`
+        document.getElementById("wind_degree").textContent = `${data.current.wind_degree}°`
+        document.getElementById("humidity").textContent = `${data.current.humidity}%`
+        document.getElementById("last_updated").textContent = `at ${data.current.last_updated}`
+        document.getElementById("vis_km").textContent = `at ${data.current.vis_km}`
+        document.getElementById("vis_miles").textContent = `at ${data.current.vis_miles}`
+        document.getElementById("splashIcon").src = `https:${data.current.condition.icon.replace("64x64", "128x128")}`
+
+      });
+  }
+</script>
+<!-- You can also require other files to run in this process -->
+<script src="./renderer.js"></script>
+</body>
+
+</html>

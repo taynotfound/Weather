@@ -1,0 +1,26 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "Weather app",
+  "main": "main.js",
+  "scripts": {
+    "start": "e .",
+    "pack:win32": "electron-packager . Weather --out=dist/win --platform=win32 --arch=ia32",
+    "pack:win64": "electron-packager . Weather --out=dist/win --platform=win32 --arch=x64 --app-version=0.1 --icon=icon/icon.ico",
+    "build": "npm run pack:win32 && npm run pack:win64",
+    "setup": "electron-installer-windows --src dist/win/Weather-win32-x64/ --dest dist/installers/64bit/ --config config.json && electron-installer-windows --src dist/win/Weather-win32-ia32/ --dest dist/installers/32bit/ --config config.json"
+  },
+  "keywords": [
+    "wheater",
+    "wheater app",
+    "app",
+    "application"
+  ],
+  "author": "little studios and luna",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.1.6",
+    "electron-installer-windows": "^3.0.0",
+    "electron-packager": "^15.2.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "dest": "dist/installers/",
+    "icon": "icon/icon.ico",
+    "tags": [
+      "Utility"
+    ],
+    "options":{
+        "authors":["Little Studios", "Luna"],
+        "copyright":"2021 Little Studios"    }
+  }
