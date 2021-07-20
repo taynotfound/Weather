@@ -97,7 +97,7 @@
   }
 
   function yes() {
-    fetch("http://api.weatherapi.com/v1/current.json?key=a815dcc598db4709869184846202108&q=" +
+    fetch("http://api.weatherapi.com/v1/current.json?key=TOKEN&q=" +
         document.getElementById("search").value)
       .then(response => response.json())
       .then(data => {
